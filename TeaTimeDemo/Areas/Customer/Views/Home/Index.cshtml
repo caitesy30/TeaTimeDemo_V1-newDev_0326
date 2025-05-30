@@ -1,0 +1,55 @@
+﻿@using Microsoft.Extensions.Localization
+@using TeaTimeDemo.Resources
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<style>
+    .img-hover-zoom {
+        transition: transform 0.3s ease;
+    }
+
+        .img-hover-zoom:hover {
+            transform: scale(1.05);
+        }
+
+    .text-fade-in {
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+    }
+
+        .text-fade-in:hover {
+            opacity: 1;
+        }
+    .row{
+        height: 250px;
+    }
+</style>
+<div class="container">
+
+ 
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6">
+            <img src="/imgproxy/h1.png" class="img-fluid rounded border border-info img-hover-zoom" />
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-primary text-fade-in">1、從上方導覽列點擊進入編輯</h5>
+        </div>
+    </div>
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6 order-md-2">
+            <img src="/imgproxy/h2.png" class="img-fluid rounded border border-info img-hover-zoom" />
+        </div>
+        <div class="col-md-6 order-md-1">
+            <h5 class="text-primary text-fade-in">2、點擊新增按鈕展開輸入欄位</h5>
+        </div>
+    </div>
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6">
+            <img src="/imgproxy/h3.png" class="img-fluid rounded border border-info img-hover-zoom" />
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-primary text-fade-in">3、依照步驟輸入料號</h5>
+        </div>
+    </div>
+
+</div>

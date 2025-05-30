@@ -1,0 +1,3 @@
+LangChain 是一個支援多種語言模型整合的 AI 工具庫，專門做 RAG、Agent 等應用。
+Chroma 是一個輕量化的本地向量資料庫。
+RAG 全名 Retrieval Augmented Generation，是結合知識檢索與AI問答的最新技術。

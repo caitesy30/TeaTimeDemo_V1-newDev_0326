@@ -1,0 +1,142 @@
+﻿@* SurveyAns的index *@
+
+
+
+@* @model TeaTimeDemo.Areas.Customer.Views.SurveyAns.IndexModel *@
+
+@using TeaTimeDemo.Models.ViewModels
+
+@model LoadSurveyVM
+
+@*問卷填寫畫面*@
+
+@* <div id="footer" class="print-footer">
+    <span id="footer-content"></span>
+</div>
+ *@
+<head>
+    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+
+    <!-- 保留原本已經存在的CSS -->
+    <link rel="stylesheet" href="~/css/surveyEdit_R5.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/labletext_CT.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/panelStyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/switchStyle.css" asp-append-version="true" /> 
+    <link rel="stylesheet" href="~/css/floatingNavigator.css" asp-append-version="true" /> 
+
+
+    <!-- 新增或合併：把功能列相關的CSS寫到surveyAnsStyle.css -->
+    <link rel="stylesheet" href="~/css/surveyAnsStyle.css" asp-append-version="true" />  
+</head>
+
+<body>
+
+    <div id="printBar" style="display:none">
+        <div>請用列印按鈕來正式列印</div>
+    </div>
+
+    <div id="loading-container" class="no-print">
+        <div id="loading-bar"></div>
+    </div>
+
+    <div id="BlockPenel">
+
+        <div id="AutoScreenBlock">
+            <div id="AutoScreen">
+                <!-- 這裡是動態產生的問卷內容 (範例) -->
+                @* @Html.Raw(Model.MceHtml) *@
+            </div>
+        </div>
+    </div>
+
+<div>
+
+</div>
+
+
+
+
+
+@section Scripts {
+   
+        <script>
+            document.addEventListener("DOMContentLoaded", async function () {
+
+                var mtNum = "@Html.Raw(Model.MtNum)";
+                document.title = "料號 - "+mtNum;
+
+              // window.addEventListener("beforeprint", () => {
+              //     const title = document.title; // 或你自訂的變數
+              //     const footerText = `${title} - Page Footer Info`;
+              //     document.getElementById("footer-content").textContent = footerText;
+              //   });
+                
+                
+                var stage = "@Html.Raw(Model.stage)";
+                console.log("MtNum:", mtNum);
+
+                var _surveyHtmlDataList = @Html.Raw(Json.Serialize(Model.surveyHtmlDataList));
+
+                // 使用 await 需要放在 async 函数中
+                try {
+                    FloatingNavigator.showNavigationUI(_surveyHtmlDataList);
+                    await SaveAndLoadAnswerMgr.LoadAllSurvey(mtNum, stage, _surveyHtmlDataList);
+
+                     FloatingNavigator.init(_surveyHtmlDataList);
+
+                    console.log("Survey data loaded successfully");
+                } catch (error) {
+                    console.error("Failed to load survey data:", error);
+                }
+
+                
+            });
+        </script>
+
+        <script>
+            window.currentUserId = '@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value';
+        </script>
+
+        @* <!-- 1. 先引入主對話窗JS --> *@
+        @* <script src="~/js/floatingAIChat.js" asp-append-version="true"></script> *@
+        @* <!-- 2. 再引入AI輔助功能 --> *@
+        @* <script src="~/js/floatingAIHelper.js" asp-append-version="true"></script> *@
+
+        <script src="~/js/floatingAIConsole.js" asp-append-version="true"></script>
+        <script src="~/js/floatingAIContainer.js" asp-append-version="true"></script>
+        <script src="~/js/floatingAIHeader.js" asp-append-version="true"></script>
+        <script src="~/js/floatingAIHistory.js" asp-append-version="true"></script>
+        <script src="~/js/floatingAIMain.js" asp-append-version="true"></script>
+        <script src="~/js/floatingAIAssistHelper.js" asp-append-version="true"></script>
+
+        <script>
+            // 這一行也放在最下面
+            window.FloatingAIConsole.init();
+
+        </script>
+
+
+     @*====================編輯文本================================================== *@   
+     
+            <!-- 既有的js檔案 (AutoScreen.js、SurveyAnswerMode.js 等) -->
+        <script src="~/js/AutoScreen.js" asp-append-version="true"></script>
+        <script src="~/js/SurveyAnswerMode.js" asp-append-version="true"></script>
+        <script src="~/js/ModuleBlockElementMgr.js" asp-append-version="true"></script>
+        <script src="~/js/ModuleBlockEditMgr.js" asp-append-version="true"></script>
+        <script src="~/js/surveyLoad.js" asp-append-version="true"></script>
+        @* <script src="~/js/SurveyEditerModeMgr.js" asp-append-version="true"></script> *@
+        <script src="~/js/ModuleBlockSettingBarMgr.js" asp-append-version="true"></script>
+        <script src="~/js/floatingNavigator.js" asp-append-version="true"></script>
+        <script src="~/js/validation.js" asp-append-version="true"></script>
+        <script src="~/js/floatingSurveyMenu.js" asp-append-version="true"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                FloatingSurveyMenu.init();
+            });
+        </script>
+
+
+      
+    }
+</body>
