@@ -30,7 +30,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System.IO; // 為 Directory 用
 using System.Linq; // 為 Select 用
 
-
+//test
 // ===================== 新增 OllamaWatcher 自動啟動檢查機制 =====================
 void EnsureOllamaWatcherRunning()
 {
