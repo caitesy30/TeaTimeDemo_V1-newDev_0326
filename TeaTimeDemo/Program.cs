@@ -35,6 +35,8 @@ using System.Linq; // 為 Select 用
 void EnsureOllamaWatcherRunning()
 {
     string exePath = @"K:\OllamaWatcher\bin\Debug\net8.0\OllamaWatcher.exe";
+    // 這裡的 exePath 是 OllamaWatcher.exe 的完整路徑
+
     string exeName = "OllamaWatcher";
 
     // 1. 先檢查是否有 OllamaWatcher 執行中
